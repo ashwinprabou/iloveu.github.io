@@ -58,7 +58,7 @@
     </style>
   </head>
   <body>
-    <h2>Hiya Das, will you be my valentine?</h2>
+    <h2 id="text">Hiya Das, will you be my valentine?</h2>
 
     <button class="yesButton">Yes!</button>
     <button id="randomButton">No.</button>
@@ -80,6 +80,7 @@
 
       // Handle the "Yes!" button click
       yesButton.addEventListener("click", () => {
+        document.getElementById("text").innerHTML = "I LOVE YOUUUU!";
         // Change the background color
         document.body.style.backgroundColor = "#ffccd5";
 
