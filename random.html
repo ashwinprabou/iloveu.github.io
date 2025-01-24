@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentine</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f0f8ff;
+        position: relative;
+      }
+      h2 {
+        position: absolute;
+        top: 300px;
+        text-align: center;
+      }
+      button {
+        position: absolute;
+        padding: 20px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: #ff0040;
+        color: white;
+        margin-left: 130px;
+      }
+
+      .yesButton {
+        margin-right: 260px;
+      }
+
+      button:hover {
+        background-color: #df92e1;
+      }
+
+      .falling-image {
+        position: absolute;
+        top: -100px;
+        animation: fall infinite linear;
+      }
+
+      @keyframes fall {
+        from {
+          transform: translateY(-100px);
+        }
+        to {
+          transform: translateY(110vh);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Hiya Das, will you be my valentine?</h2>
+
+    <button class="yesButton">Yes!</button>
+    <button id="randomButton">No.</button>
+
+    <script>
+      const randButton = document.getElementById("randomButton");
+      const yesButton = document.querySelector(".yesButton");
+
+      // Randomly move the "No." button
+      randButton.addEventListener("click", () => {
+        const randomX =
+          Math.random() * (window.innerWidth - randButton.offsetWidth);
+        const randomY =
+          Math.random() * (window.innerHeight - randButton.offsetHeight);
+
+        randButton.style.left = `${randomX}px`;
+        randButton.style.top = `${randomY}px`;
+      });
+
+      // Handle the "Yes!" button click
+      yesButton.addEventListener("click", () => {
+        // Change the background color
+        document.body.style.backgroundColor = "#ffccd5";
+
+        // Start falling PNG animation
+        setInterval(() => {
+          const img = document.createElement("img");
+          img.src = "heart.png"; // Replace with the path to your PNG
+          img.className = "falling-image";
+          img.style.left = Math.random() * window.innerWidth + "px";
+          img.style.width = `${Math.random() * 30 + 20}px`; // Random size between 20px-50px
+          img.style.animationDuration = `${Math.random() * 3 + 5}s`; // Random fall duration 5-8s
+          img.style.opacity = `${Math.random() * 0.5 + 0.5}`; // Random opacity 0.5-1.0
+          document.body.appendChild(img);
+
+          // Remove the image once it goes off the screen
+          img.addEventListener("animationend", () => {
+            img.remove();
+          });
+        }, 200); // Add a new image every 200ms
+      });
+    </script>
+  </body>
+</html>
